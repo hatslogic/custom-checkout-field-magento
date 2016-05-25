@@ -1,0 +1,10 @@
+<?php $order = $this->getOrder(); ?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head"><?php echo $this->__('Referrer') ?></h4>
+    </div>
+    <fieldset>
+        <?php echo $order->getReferrer()?>
+    </fieldset>
+</div>
+<div class="clear"></div>

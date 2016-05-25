@@ -1,0 +1,43 @@
+
+<?php
+$configValue = Mage::getStoreConfig('referrer_options/options/from');
+$values = explode(',', $configValue);
+?>
+<?php
+	//Show only if atleast one option is available
+	if(!empty($values)){
+?>
+	<table>
+		<tr><td>How did you hear about our website?</td></tr>
+		<tr>
+			<td>
+				<select name="referrer" id="referrer">
+					<option value="">Select option</option>
+					<?php
+						foreach ($values as $value) {
+							echo '<option value="'.$value.'">'.$value.'</option>';
+						}
+					?>
+				</select>		
+			</td>
+		</tr>
+	</table>
+
+	<!--To add selected data along with Submitting form-->
+	<script type="text/javascript">
+	    // Add our field to the data submitted by Review.save()
+	    Review.prototype.save = Review.prototype.save.wrap(function(orig) {
+	        var form = $(this.agreementsForm ? this.agreementsForm : payment.form);
+	        
+	        if (form) {
+	        	var e        = document.getElementById("referrer");
+				var referrer = e.options[e.selectedIndex].value;
+				var field    = '<input type="hidden" name="referrer" value="'+referrer+'">';
+	            form.insert(field);
+	        }
+	        orig();
+	    });
+	</script>
+<?php
+}
+?>

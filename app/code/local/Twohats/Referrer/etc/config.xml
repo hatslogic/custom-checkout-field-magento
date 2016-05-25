@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Twohats_Referrer>
+      <version>0.1.0</version>
+    </Twohats_Referrer>
+  </modules>
+
+  <!--Load frontend layout file-->
+
+  <frontend>
+      <layout>
+          <updates>
+              <referrer>
+                  <file>twohats_referrer_layout.xml</file>
+              </referrer>
+          </updates>
+      </layout>
+  </frontend>
+
+  <global>
+
+    <!--Resources models-->
+    <resources>
+        <!--Run sql changes-->
+        <referrer_setup>
+            <setup>
+                 <module>Twohats_Referrer</module>
+            </setup>
+            <connection>
+                <use>core_setup</use>
+            </connection>
+        </referrer_setup>
+    </resources>
+
+  	<!--Load helpers-->
+    <helpers>
+      <referrer>
+        <class>Twohats_Referrer_Helper</class>
+      </referrer>
+    </helpers>
+
+    <!--Load models-->
+    <models>
+      <referrer>
+        <class>Twohats_Referrer_Model</class>
+      </referrer>
+    </models>
+
+    <events>
+
+      <checkout_type_onepage_save_order_after>
+          <observers>
+              <Twohats_Referrer_model_observer>
+                  <class>Twohats_Referrer_Model_Observer</class>
+                  <method>saveReferrer</method>
+                  <type>singleton</type>
+              </Twohats_Referrer_model_observer>
+          </observers>
+      </checkout_type_onepage_save_order_after>
+
+    </events>
+
+  </global>
+
+  <!--Admin options-->
+  <adminhtml>
+    <!--Add options page in admin configuration area-->
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <referrer_options>
+                                        <title>Twohats Checkout Referrer</title>
+                                    </referrer_options>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+
+    <!--Load admin layout-->
+    <layout>
+        <updates>
+            <referrer>
+              <file>twohats_referrer_layout.xml</file>
+            </referrer>
+        </updates>
+    </layout>
+    
+    <!--Show referrer block in order view page-->
+    <events>
+      <core_block_abstract_to_html_after>
+        <observers>
+          <twohats_referrer_core_block_abstract_to_html_after>
+            <class>Twohats_Referrer_Model_Adminhtml_Observer</class>
+            <method>addOrderReferrerBlock</method>
+          </twohats_referrer_core_block_abstract_to_html_after>
+        </observers>
+      </core_block_abstract_to_html_after>
+    </events>
+
+  </adminhtml>
+
+</config>

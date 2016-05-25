@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twohats_Referrer>
+        	<active>true</active>
+        	<codePool>local</codePool>
+        </Twohats_Referrer>
+    </modules>
+</config>

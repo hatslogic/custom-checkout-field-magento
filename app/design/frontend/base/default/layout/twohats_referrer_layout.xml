@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<layout version="0.1.0">
+    <!--Add option menu below items in checkout review tab-->
+    <checkout_onepage_review>
+        <reference name="checkout.onepage.review.info.items.after">
+            <block type="core/template" name="twohats.referrerField" template="twohats/referrer/fields.phtml"/>
+        </reference>
+    </checkout_onepage_review>
+
+
+</layout>
